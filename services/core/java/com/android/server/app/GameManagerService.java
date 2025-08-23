@@ -281,6 +281,12 @@ public final class GameManagerService extends IGameManagerService.Stub {
         }
 
         mSysProps = injector.createSystemPropertiesWrapper();
+        NtRefreshRateController.get().setGameFpsCallback(new NtRefreshRateController.GameFpsCallback() {
+            @Override
+            public void setGameFps(int uid, float fps) {
+                setGameModeFrameRateOverride(uid, fps);
+            }
+        });
     }
 
     @Override
